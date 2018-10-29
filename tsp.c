@@ -1,5 +1,5 @@
 //
-// Student name
+// 86182 - Rui Miguel Oliveira Coelho
 // Student name
 // ...
 //
@@ -16,7 +16,7 @@
 #include <sys/resource.h>
 
 #include "cities.h"
-#include "../P01/elapsed_time.h"
+#include "elapsed_time.h"
 
 
 //
