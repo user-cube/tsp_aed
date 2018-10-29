@@ -49,9 +49,24 @@ void tsp_v1(int n,int m,int *a)
   else
   { // visit permutation
     n_tours++;
+    int distancia = 0;
     // modify the following code to do your stuff
+    a[n] = a[0];
     for(i = 0;i < n;i++)
-      printf("%d%s",a[i],(i == n - 1) ? "\n" : " ");
+      distancia += cities[a[i]].distance[a[i+1]];
+
+    if(distancia < min_length) 
+    {
+      min_length = distancia;
+      for(i = 0;i < n;i++)
+        min_tour[i] = a[i];
+    }
+
+    if (distancia > max_length){
+      max_length = distancia;
+      for(i = 0;i < n;i++)
+        max_tour[i] = a[i];
+    }      //printf("%d%s",a[i],(i == n - 1) ? "\n" : " ");
   }
 }
 
