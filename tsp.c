@@ -81,8 +81,8 @@ int main(int argc,char **argv)
   char file_name[32];
   double dt1;
 
-  n_mec = 0; // CHANGE THIS!
-  special = 0;
+  n_mec = 86182; // CHANGE THIS!
+  special = 1;
   init_cities_data(n_mec,special);
   printf("data for init_cities_data(%d,%d)\n",n_mec,special);
   fflush(stdout);
@@ -95,7 +95,7 @@ int main(int argc,char **argv)
     // try tsp_v1
     //
     dt1 = -1.0;
-    if(n <= 16)
+    if(n <= 13)
     {
       (void)elapsed_time();
       for(i = 0;i < n;i++)
