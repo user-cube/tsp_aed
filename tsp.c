@@ -95,7 +95,7 @@ int main(int argc,char **argv)
     // try tsp_v1
     //
     dt1 = -1.0;
-    if(n <= 13)
+    if(n <= 16)
     {
       (void)elapsed_time();
       for(i = 0;i < n;i++)
