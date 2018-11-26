@@ -16,7 +16,6 @@
   #include <sys/resource.h>
 
   #include "cities.h"
-  #include "../P01/elapsed_time.h"
 
 
   //
@@ -69,6 +68,27 @@
     }
   }
 
+  // void calc_dist(int dest, int mask){
+  //   if (best_distance[dest][mask] == 0)
+  //   {
+  //     int i,m=10000000,d;
+  //     for (i = 0; i < n; ++i)
+  //     {
+  //       if (mask&(1<<i))
+  //       {
+  //         d = calc_dist(i,mask^(1<<i)) + dist(i,dest)
+  //         if(d<m)
+  //           m=d;
+  //       }
+  //     }
+  //   }
+  // }
+
+  //Mask comeca a 1 e posicao a 9
+
+  //Segundo relatorio
+  //Gerar arvores binarias ordenadas
+  //Parar no 10000
 
   //
   // main program
