@@ -2,3 +2,5 @@ max_*
 min_*
 tsp.o
 hist.txt
+*
+!*.*
