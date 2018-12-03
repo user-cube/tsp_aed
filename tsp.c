@@ -16,6 +16,7 @@
   #include <sys/resource.h>
 
   #include "cities.h"
+  #include "elapsed_time.h" 
 
 
   //
@@ -68,21 +69,31 @@
     }
   }
 
-  // void calc_dist(int dest, int mask){
-  //   if (best_distance[dest][mask] == 0)
-  //   {
-  //     int i,m=10000000,d;
-  //     for (i = 0; i < n; ++i)
-  //     {
-  //       if (mask&(1<<i))
-  //       {
-  //         d = calc_dist(i,mask^(1<<i)) + dist(i,dest)
-  //         if(d<m)
-  //           m=d;
-  //       }
-  //     }
-  //   }
-  // }
+                      // dest     mask
+  // Talvez ter um array contador a incrementar D e M
+  static int best_distance[max_n_cities][1<<18];
+
+  int calc_dist(int n, int dest, int mask){
+    if (mask == ((1<<n)-1))
+       return cities[dest].distance[0];
+    if (best_distance[dest][mask] != -1) return best_distance[dest][mask];
+      
+    int i,m=10000,d;
+    for (i = 1; i < n;i++)
+     {
+      if ((mask&(1<<i))==0)
+      {
+        d = calc_dist(n,i,mask|(1<<i)) + cities[dest].distance[i];
+        if(d<m)
+          m=d;
+      }
+    }
+    // Explicacao da
+    //00001 -> 00011 & 00010
+    //        00011 & 00100 -> 00111 ... -> 11111 
+
+    return best_distance[dest][mask]=m;
+  }
 
   //Mask comeca a 1 e posicao a 9
 
@@ -108,6 +119,7 @@
   #if 0
     print_distances();
   #endif
+
     for(n = 3;n <= n_cities;n++)
     {
         // data for init_cities_data(89016,1)
@@ -151,7 +163,7 @@
         //   min  1675 [ 0, 7, 9,12, 2, 4, 6, 3, 5, 1,11,10, 8,13,14]
         //   max  6605 [ 0, 8, 2,13,12,10, 4,11, 6, 7, 3,14, 5, 9, 1]
       dt1 = -1.0;
-      if(n <= 13) //mudar aqui o n cidades
+      if(n <= 12) //mudar aqui o n cidades
       {
         FILE *fp = fopen("hist.txt","w");
         for(j=0;j<10000;j++)
@@ -165,6 +177,7 @@
         n_tours = 0l;
         tsp_v1(n,1,a); // no need to change the starting city, as we are making a tour
         dt1 = elapsed_time();
+
         printf("tsp_v1() finished in %8.3fs (%ld tours generated)\n",dt1,n_tours);
         printf("  min %5d [",min_length);
         for(i = 0;i < n;i++)
@@ -183,6 +196,14 @@
           make_map(file_name,max_tour);
         }
       }
+      for (int i = 0; i<n; i++){
+        for (int j = 0; j<(1<<n); j++){
+          best_distance[i][j]=-1;
+        }
+      }
+
+      int best=calc_dist(n,0,1);
+      printf("Primeiras %d cidades: %d\n",n, best);
     }
     return 0;
   }
