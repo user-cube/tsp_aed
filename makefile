@@ -15,4 +15,8 @@ examples:	examples.c
 	cc -Wall -O2 examples.c -o $@ -lm
 
 tsp:		tsp.c cities.h
-	cc -Wall -O3 tsp.c -o tsp -lm
+	cc -Wall -O3 tsp.c -o tsp -lm 
+
+bruteforce:		bruteforce.c cities.h
+	cc -Wall -O3 bruteforce.c -o bruteforce -lm
+
