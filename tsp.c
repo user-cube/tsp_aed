@@ -72,6 +72,8 @@
                       // dest     mask
   // Talvez ter um array contador a incrementar D e M
   static int best_distance[max_n_cities][1<<18];
+  static int best_path[max_n_cities];
+  int k = 0;
 
   int calc_dist(int n, int dest, int mask){
     if (mask == ((1<<n)-1))
@@ -86,6 +88,8 @@
         d = calc_dist(n,i,mask|(1<<i)) + cities[dest].distance[i];
         if(d<m)
           m=d;
+          //best_path[k]=i;
+          //k++;
       }
     }
     // Explicacao da
@@ -94,6 +98,10 @@
 
     return best_distance[dest][mask]=m;
   }
+
+
+  //Para saber melhor caminho, fazemos igual mas guardamos melhores i's em vez de melhores dists
+
 
   //Mask comeca a 1 e posicao a 9
 
@@ -205,5 +213,13 @@
       int best=calc_dist(n,0,1);
       printf("Primeiras %d cidades: %d\n",n, best);
     }
+
+    printf("Melhor Trajeto: ");
+    for (int i = 0; i <= 18; i++)
+    {
+      printf("%d ", best_path[i]);
+    }
+
+    printf("\n");
     return 0;
   }
