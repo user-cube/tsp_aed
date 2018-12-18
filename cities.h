@@ -314,76 +314,76 @@ static void init_cities_data(int n_mec,int special)
   }
 }
 
-static void print_distances(void)
-{
-  int i,j;
+// static void print_distances(void)
+// {
+//   int i,j;
 
-  for(i = 0;i < n_cities;i++)
-  {
-    for(j = 0;cities[i].name[j] != '\0';j++)
-      if(((int)cities[i].name[j] & 0xFF) > 127)
-        break; // found an accented letter
-    printf("// %s%16s",(cities[i].name[j] != '\0') ? " " : "",cities[i].name); // some city names have ONE accented letter...
-    for(j = 0;j < n_cities;j++)
-      if(i == j)
-        printf(" ---");
-      else
-        printf(" %3d",cities[i].distance[j]);
-    printf("\n");
-  }
-}
+//   for(i = 0;i < n_cities;i++)
+//   {
+//     for(j = 0;cities[i].name[j] != '\0';j++)
+//       if(((int)cities[i].name[j] & 0xFF) > 127)
+//         break; // found an accented letter
+//     printf("// %s%16s",(cities[i].name[j] != '\0') ? " " : "",cities[i].name); // some city names have ONE accented letter...
+//     for(j = 0;j < n_cities;j++)
+//       if(i == j)
+//         printf(" ---");
+//       else
+//         printf(" %3d",cities[i].distance[j]);
+//     printf("\n");
+//   }
+// }
 
-static void make_map(char *file_name,int *cities_idx)
-{
-  FILE *fp_in,*fp_out;
-  char *s,line[65536];
-  int i,modify;
+// static void make_map(char *file_name,int *cities_idx)
+// {
+//   FILE *fp_in,*fp_out;
+//   char *s,line[65536];
+//   int i,modify;
 
-  if(strcmp(file_name,"pt_master.svg") == 0)
-  {
-    fprintf(stderr,"Bad file name (%s)\n",file_name);
-    exit(1);
-  }
-  for(i = 0;i <= 4 * max_n_cities && cities_idx[i] >= 0;i++)
-    if(cities_idx[i] >= n_cities)
-    {
-      fprintf(stderr,"City index (%d) too large\n",cities_idx[i]);
-      exit(1);
-    }
-  fp_in = fopen("pt_master.svg","rb");
-  if(fp_in == NULL)
-  {
-    fprintf(stderr,"Cannot open file pt_master.svg\n");
-    exit(1);
-  }
-  fp_out = fopen(file_name,"wb");
-  if(fp_out == NULL)
-  {
-    fprintf(stderr,"Cannot create file %s\n",file_name);
-    exit(1);
-  }
-  modify = 0;
-  while(fgets(line,sizeof(line),fp_in) != NULL)
-  {
-    if(strstr(line,"id=\"ClosedPath\"") != NULL)
-      modify = 1; // modify the next line
-    else if(modify != 0)
-    {
-      modify = 0;
-      s = strstr(line,"d=\"");
-      if(s == NULL)
-      {
-        fprintf(stderr,"Unexpected contents in the file pr_master.svg\n");
-        exit(1);
-      }
-      s += 3;
-      for(i = 0;i <= 4 * max_n_cities && cities_idx[i] >= 0;i++)
-        s += sprintf(s,"%s %.4f,%.4f",(i == 0) ? "M" : ((i == 1) ? " L" : ""),cities[cities_idx[i]].x,cities[cities_idx[i]].y);
-      sprintf(s," Z\"\n");
-    }
-    fprintf(fp_out,"%s",line);
-  }
-}
+//   if(strcmp(file_name,"pt_master.svg") == 0)
+//   {
+//     fprintf(stderr,"Bad file name (%s)\n",file_name);
+//     exit(1);
+//   }
+//   for(i = 0;i <= 4 * max_n_cities && cities_idx[i] >= 0;i++)
+//     if(cities_idx[i] >= n_cities)
+//     {
+//       fprintf(stderr,"City index (%d) too large\n",cities_idx[i]);
+//       exit(1);
+//     }
+//   fp_in = fopen("pt_master.svg","rb");
+//   if(fp_in == NULL)
+//   {
+//     fprintf(stderr,"Cannot open file pt_master.svg\n");
+//     exit(1);
+//   }
+//   fp_out = fopen(file_name,"wb");
+//   if(fp_out == NULL)
+//   {
+//     fprintf(stderr,"Cannot create file %s\n",file_name);
+//     exit(1);
+//   }
+//   modify = 0;
+//   while(fgets(line,sizeof(line),fp_in) != NULL)
+//   {
+//     if(strstr(line,"id=\"ClosedPath\"") != NULL)
+//       modify = 1; // modify the next line
+//     else if(modify != 0)
+//     {
+//       modify = 0;
+//       s = strstr(line,"d=\"");
+//       if(s == NULL)
+//       {
+//         fprintf(stderr,"Unexpected contents in the file pr_master.svg\n");
+//         exit(1);
+//       }
+//       s += 3;
+//       for(i = 0;i <= 4 * max_n_cities && cities_idx[i] >= 0;i++)
+//         s += sprintf(s,"%s %.4f,%.4f",(i == 0) ? "M" : ((i == 1) ? " L" : ""),cities[cities_idx[i]].x,cities[cities_idx[i]].y);
+//       sprintf(s," Z\"\n");
+//     }
+//     fprintf(fp_out,"%s",line);
+//   }
+// }
 
 #ifdef include_main
 //

@@ -8,6 +8,16 @@
   // solution of the traveling salesman problem
   //
 
+
+
+
+
+  //falar sobre o problema, falar sobre as 3 metodologias,
+  //para cada uma explicar a approach e mostrar resultados
+  //Analise fos tempos de execuçao, comparar numa escala logaritmica
+  //Mostrar graficos do matlab
+  //Consideraçoes finais e bibliografia
+
   #include <math.h>
   #include <stdio.h>
   #include <stdlib.h>
@@ -72,7 +82,7 @@
                       // dest     mask
   // Talvez ter um array contador a incrementar D e M
   static int best_distance[max_n_cities][1<<18];
-  static int best_path[max_n_cities];
+  static int best_path[max_n_cities][1<<18];
   int k = 0;
 
   int calc_dist(int n, int dest, int mask){
@@ -101,13 +111,7 @@
 
 
   //Para saber melhor caminho, fazemos igual mas guardamos melhores i's em vez de melhores dists
-
-
   //Mask comeca a 1 e posicao a 9
-
-  //Segundo relatorio
-  //Gerar arvores binarias ordenadas
-  //Parar no 10000
 
   //
   // main program
@@ -213,6 +217,8 @@
       int best=calc_dist(n,0,1);
       printf("Primeiras %d cidades: %d\n",n, best);
     }
+    double dt2 = elapsed_time();
+    printf("Finished in %8.3fs\n",dt2);
 
     printf("Melhor Trajeto: ");
     for (int i = 0; i <= 18; i++)
