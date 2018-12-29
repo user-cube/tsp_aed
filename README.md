@@ -1,4 +1,4 @@
-# tsp_aed
+# TSP - Traveling Salesman Problem
 Resolution of the traveling salesman problem.
 
 ## To compile
