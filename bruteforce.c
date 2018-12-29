@@ -1,6 +1,7 @@
   //
   // Tomas Costa
-  // Student name
+  // Rui Coelho
+  // João Carvalho
   // ...
   //
   // AED, 2018/2019
