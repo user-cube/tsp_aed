@@ -3,7 +3,7 @@
 #
 
 clean:
-	rm -f examples tsp a.out
+	rm -f examples tsp a.out bruteforce
 
 all:		examples
 

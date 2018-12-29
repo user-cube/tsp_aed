@@ -17,7 +17,7 @@ $ ./tsp -f
 ```
 To run bruteforce approach open a terminal and run:
 ```
-$ ./bruteforce
+$ ./bruteforce -f
 ```
 ## Clean
 To clean old builds run:
