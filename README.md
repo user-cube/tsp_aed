@@ -1,16 +1,32 @@
 # TSP - Traveling Salesman Problem
 Resolution of the traveling salesman problem.
 
-## To compile
-Use makefile:
+## Download and Installation
+To begin using this program, choose one of the following options to get started:
+* Clone the repo: `git clone https://github.com/user-cube/tsp_aed`
+* [Fork, Clone](https://github.com/user-cube/tsp_aed)
+* [Download](https://github.com/user-cube/tsp_aed/archive/master.zip)
+
+## Setup and running
+You can run and compile everything with the created makefile.
+
+### Compile
+To compile open your shell and type:
 ```
-$ make tsp
+$ make binary_tree
 ```
-To compile bruteforce approach:
+You can compile bruteforce solution by typing:
 ```
 $ make bruteforce
 ```
-## Run
+
+### Clean
+To clean open your shell and type:
+```
+$ make clean
+```
+
+### Run
 Open a terminal and run:
 ```
 $ ./tsp -f
@@ -18,9 +34,4 @@ $ ./tsp -f
 To run bruteforce approach open a terminal and run:
 ```
 $ ./bruteforce -f
-```
-## Clean
-To clean old builds run:
-```
-$ make clean
 ```
